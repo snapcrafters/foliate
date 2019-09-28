@@ -4,20 +4,20 @@ grade: stable
 summary: Foliate
 description: |
   Foliate
+
 base: core18
-
 confinement: devmode
-
 
 layout:
   /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/webkit2gtk-4.0:
     bind: $SNAP/gnome-platform/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/webkit2gtk-4.0
 
-
 apps:
   foliate:
-    command: desktop-launch $SNAP/usr/bin/com.github.johnfactotum.Foliate
-    plugs: 
+    command: usr/bin/com.github.johnfactotum.Foliate
+    command-chain:
+      - bin/desktop-launch
+    plugs:
       - desktop
       - desktop-legacy
       - wayland
@@ -29,7 +29,6 @@ apps:
     desktop: usr/share/applications/com.github.johnfactotum.Foliate.desktop
     environment:
       DISABLE_WAYLAND: "1"
-      LD_LIBRARY_PATH: "$SNAP/usr/lib/x86_64-linux-gnu/webkit2gtk-4.0/:$LD_LIBRARY_PATH$LD_LIBRARY_PATH"
 
 parts:
   foliate:
@@ -59,6 +58,7 @@ parts:
     plugin: nil
     stage-packages:
       - gjs      
+      - gir1.2-webkit2-4.0
     # prime:
     #   - "usr/bin/gjs*"
 
