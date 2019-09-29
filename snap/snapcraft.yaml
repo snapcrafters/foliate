@@ -32,14 +32,8 @@ layout:
 apps:
   foliate:
     command: usr/bin/com.github.johnfactotum.Foliate
-    command-chain:
-      - bin/desktop-launch
+    extensions: [gnome-3-28]
     plugs:
-      - desktop
-      - desktop-legacy
-      - wayland
-      - x11
-      - unity7
       - gsettings # For desktop theme detection under Wayland session
       - home
     slots:
@@ -70,8 +64,6 @@ parts:
       # Point icon to the correct location
       sed -i.bak -e 's|Icon=com.github.johnfactotum.Foliate|Icon=/usr/share/icons/hicolor/scalable/apps/com.github.johnfactotum.Foliate.svg|g' data/com.github.johnfactotum.Foliate.desktop.in
 
-    after: [desktop-gnome-platform]
-
   libraries:
     plugin: nil
     stage-packages:
@@ -79,39 +71,3 @@ parts:
       - gir1.2-webkit2-4.0
     # prime:
     #   - "usr/bin/gjs*"
-
-  # This part installs the `desktop-launch` script which initialises desktop
-  # features such as fonts, themes and the XDG environment.
-  # 
-  # It is copied straight from the snapcraft desktop helpers project. Please
-  # periodically check the source for updates and copy the changes.
-  #    https://github.com/ubuntu/snapcraft-desktop-helpers/blob/master/snapcraft.yaml
-  # 
-  desktop-gnome-platform:
-    source: https://github.com/ubuntu/snapcraft-desktop-helpers.git
-    source-subdir: gtk
-    plugin: make
-    make-parameters: ["FLAVOR=gtk3"]
-    build-packages:
-      - gcc
-    override-build: |
-      snapcraftctl build
-      mkdir -pv $SNAPCRAFT_PART_INSTALL/gnome-platform
-
-plugs:
-  gnome-3-28-1804:
-    interface: content
-    target: $SNAP/gnome-platform
-    default-provider: gnome-3-28-1804
-  gtk-3-themes:
-    interface: content
-    target: $SNAP/data-dir/themes
-    default-provider: gtk-common-themes
-  icon-themes:
-    interface: content
-    target: $SNAP/data-dir/icons
-    default-provider: gtk-common-themes
-  sound-themes:
-    interface: content
-    target: $SNAP/data-dir/sounds
-    default-provider: gtk-common-themes
