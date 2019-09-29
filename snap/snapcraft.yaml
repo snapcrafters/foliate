@@ -1,12 +1,29 @@
 name: foliate
+title: Foliate
 version: '0.1'
 grade: stable
-summary: Foliate
+summary: Foliate is a simple and modern GTK eBook viewer.
 description: |
-  Foliate
+  Foliate is a simple and modern GTK eBook viewer.
+
+  Features include:
+
+  * Two-page view and scrolled view
+  * Customize font and line-spacing
+  * Light, sepia, dark, and invert mode
+  * Reading progress slider with chapter marks
+  * Bookmarks and annotations
+  * Find in book
+  * Quick dictionary lookup
 
 base: core18
-confinement: devmode
+confinement: strict
+
+slots:
+  dbus-daemon:
+    interface: dbus
+    bus: session
+    name: com.github.johnfactotum.Foliate
 
 layout:
   /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/webkit2gtk-4.0:
@@ -25,6 +42,8 @@ apps:
       - unity7
       - gsettings # For desktop theme detection under Wayland session
       - home
+    slots:
+      - dbus-daemon
     common-id: com.github.johnfactotum.Foliate.desktop
     desktop: usr/share/applications/com.github.johnfactotum.Foliate.desktop
     environment:
@@ -52,7 +71,6 @@ parts:
       sed -i.bak -e 's|Icon=com.github.johnfactotum.Foliate|Icon=/usr/share/icons/hicolor/scalable/apps/com.github.johnfactotum.Foliate.svg|g' data/com.github.johnfactotum.Foliate.desktop.in
 
     after: [desktop-gnome-platform]
-
 
   libraries:
     plugin: nil
