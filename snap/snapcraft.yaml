@@ -45,10 +45,6 @@ parts:
       snap/foliate/current/usr: usr
     source: https://github.com/johnfactotum/foliate.git
     build-packages:
-      - desktop-file-utils
-      - gettext
-      - appstream-util
-      - libglib2.0-dev
       - libgjs-dev
     override-pull: |
       snapcraftctl pull
