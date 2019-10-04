@@ -40,6 +40,10 @@ apps:
       LD_LIBRARY_PATH: $SNAP/gnome-platform/usr/lib/
       GI_TYPELIB_PATH: $SNAP/gnome-platform/usr/lib/gjs/girepository-1.0
 
+layout:
+  /usr/bin/gjs:
+    symlink: $SNAP/gnome-platform/usr/bin/gjs
+
 parts:
   foliate:
     plugin: meson
@@ -51,8 +55,5 @@ parts:
       - libgjs-dev
     override-pull: |
       snapcraftctl pull
-      # Point to the snapped version of gjs
-      sed -i.bak -e 's|@GJS@|/snap/foliate/current/gnome-platform/usr/bin/gjs|g' src/com.github.johnfactotum.Foliate.in
-
       # Point icon to the correct location
       sed -i.bak -e 's|Icon=com.github.johnfactotum.Foliate|Icon=/usr/share/icons/hicolor/scalable/apps/com.github.johnfactotum.Foliate.svg|g' data/com.github.johnfactotum.Foliate.desktop.in
