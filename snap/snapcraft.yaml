@@ -46,6 +46,7 @@ parts:
     source: https://github.com/johnfactotum/foliate.git
     build-packages:
       - libgjs-dev
+      - gettext
     override-pull: |
       snapcraftctl pull
       # Point to the snapped version of gjs
