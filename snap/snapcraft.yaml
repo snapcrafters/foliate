@@ -6,12 +6,6 @@ adopt-info: foliate
 base: core18
 confinement: strict
 
-slots:
-  dbus-daemon:
-    interface: dbus
-    bus: session
-    name: com.github.johnfactotum.Foliate
-
 apps:
   foliate:
     command: usr/bin/com.github.johnfactotum.Foliate
@@ -49,3 +43,9 @@ parts:
     stage-packages:
       - gjs
       - gir1.2-webkit2-4.0
+
+slots:
+  dbus-daemon:
+    interface: dbus
+    bus: session
+    name: com.github.johnfactotum.Foliate
