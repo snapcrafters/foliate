@@ -1,7 +1,9 @@
 name: foliate
-version: 'git'
+title: Foliate
+version: git
 grade: stable
 adopt-info: foliate
+license: GPL-3.0+
 
 base: core18
 confinement: strict
