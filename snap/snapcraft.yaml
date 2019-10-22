@@ -1,6 +1,4 @@
 name: foliate
-title: Foliate
-version: git
 grade: stable
 adopt-info: foliate
 license: GPL-3.0+
