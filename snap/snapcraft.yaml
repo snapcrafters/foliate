@@ -44,12 +44,6 @@ parts:
       snap/foliate/current/usr: usr
     parse-info: [usr/share/metainfo/com.github.johnfactotum.Foliate.appdata.xml]
 
-  libraries:
-    plugin: nil
-    stage-packages:
-      - gjs
-      - gir1.2-webkit2-4.0
-
 slots:
   dbus-daemon:
     interface: dbus
